@@ -36,8 +36,8 @@ class Product(models.Model):
         permissions = [("can_read_price","Can read price")]
 
 
-    def get_absolute_url(self):
-        return reverse("products:ProductDetail", kwargs={"pk": self.id, 'name' : self.title.replace(' ','-')})  # دریافت مقدار از url
+#     def get_absolute_url(self):
+#         return reverse("products:ProductDetail", kwargs={"pk": self.id, 'name' : self.title.replace(' ','-')})  # دریافت مقدار از url
 
 
     def image_admin(self):
