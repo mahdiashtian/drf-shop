@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from .serializer_ import ProductSerializers
+from .models import Product
+from rest_framework.generics import ListAPIView
 
-# Create your views here.
+
+class ProductListView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializers

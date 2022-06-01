@@ -36,6 +36,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to=upload_image_path,null=True,blank=True,verbose_name='تصویر')
     active = models.BooleanField(default=False,verbose_name='وضعیت فعالیت محصول')
     visit_count = models.IntegerField(default=0,verbose_name='تعداد بازدید',editable=False)
+    is_slider = models.BooleanField(default=False,verbose_name='استفاده به عنوان اسلایدر')
 
 
     class Meta:
