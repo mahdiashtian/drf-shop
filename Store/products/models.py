@@ -38,9 +38,6 @@ class Product(models.Model):
     visit_count = models.IntegerField(default=0,verbose_name='تعداد بازدید',editable=False)
 
 
-
-
-
     class Meta:
         app_label = "products"
         verbose_name = 'محصول'
@@ -50,13 +47,8 @@ class Product(models.Model):
         permissions = [("can_change_price","Can change price")]
 
 
-<<<<<<< HEAD
     # def get_absolute_url(self):
     #     return reverse("products:ProductDetail", kwargs={"pk": self.id, 'name' : self.title.replace(' ','-')})  # دریافت مقدار از url
-=======
-#     def get_absolute_url(self):
-#         return reverse("products:ProductDetail", kwargs={"pk": self.id, 'name' : self.title.replace(' ','-')})  # دریافت مقدار از url
->>>>>>> cafea4c81668b0b792d834f2c329e1da81e774d1
 
 
     def image_admin(self):
@@ -66,8 +58,5 @@ class Product(models.Model):
     image_admin.short_description = "تصویر"
 
 
-
     def __str__(self):
         return self.title
-
-# Create your models here.

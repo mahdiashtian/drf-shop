@@ -15,7 +15,6 @@ def upload_galleries_image_path(instance,filename):
     instance = instance.product
     name,ext = get_file_name(filename)
     final_name = f"{instance.title}-{name}-{ext}"
-    print(final_name)
     return f"products/gallerie/{instance.id}/{final_name}"
 
 
