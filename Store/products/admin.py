@@ -24,12 +24,15 @@ class ProductAdmin(admin.ModelAdmin):
 
 
     def get_form(self, request, obj=None, **kwargs):
-        if request.user.has_perm("can_read_price"):
+        if request.user.has_perm("products.can_change_price"):
             form = EventAdminForm
         else:
             form = EventForm
 
         return form
+
+
+
 
 
     class Meta:
