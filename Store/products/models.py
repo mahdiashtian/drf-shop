@@ -50,8 +50,13 @@ class Product(models.Model):
         permissions = [("can_change_price","Can change price")]
 
 
+<<<<<<< HEAD
     # def get_absolute_url(self):
     #     return reverse("products:ProductDetail", kwargs={"pk": self.id, 'name' : self.title.replace(' ','-')})  # دریافت مقدار از url
+=======
+#     def get_absolute_url(self):
+#         return reverse("products:ProductDetail", kwargs={"pk": self.id, 'name' : self.title.replace(' ','-')})  # دریافت مقدار از url
+>>>>>>> cafea4c81668b0b792d834f2c329e1da81e774d1
 
 
     def image_admin(self):
