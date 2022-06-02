@@ -1,9 +1,6 @@
 import imp
-from django.shortcuts import render
-from rest_framework.generics import RetrieveAPIView,ListAPIView
+from rest_framework.generics import ListAPIView
 from .serializer_ import CommentSerializers
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
 from .models import Comment
 from rest_framework.permissions import IsAuthenticated
 

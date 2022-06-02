@@ -32,9 +32,6 @@ class ProductAdmin(admin.ModelAdmin):
         return form
 
 
-
-
-
     class Meta:
         model = Product
 
