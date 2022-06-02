@@ -1,7 +1,5 @@
-from django.contrib import admin
 from django.urls import path
-from Store import settings
-from .views import ProductListView
+from .views import ProductListView,ProductRetrieveView
 
 
 app_name = 'products'
@@ -9,4 +7,5 @@ app_name = 'products'
 
 urlpatterns = [
     path('product', ProductListView.as_view(),name='Prlist'),
+    path('product/<int:pk>', ProductRetrieveView.as_view(),name='Prretrieve'),
 ]

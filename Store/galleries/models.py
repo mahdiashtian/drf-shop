@@ -20,6 +20,7 @@ def upload_galleries_image_path(instance,filename):
 
 class ProductGallery(models.Model):
     image = models.ImageField(upload_to=upload_galleries_image_path, verbose_name='تصویر')
+    
     product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='gallery',related_query_name='gallery_Q')
 
 

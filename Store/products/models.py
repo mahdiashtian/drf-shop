@@ -16,13 +16,10 @@ def upload_image_path(instance,filename):
 
 
 class Product(models.Model):
-
-
     userdefined_error_msg = {
         'max_length': 'حداثر 150 حرف',
         'blank': 'این فیلد نمی تواند خالی باشد'
     }
-
 
     title = models.CharField(
         verbose_name='عنوان',
@@ -31,11 +28,17 @@ class Product(models.Model):
         help_text="اسم محصول",
         error_messages=userdefined_error_msg
     )
+    
     description = models.TextField(verbose_name='توضیحات')
+    
     price = models.IntegerField(verbose_name='قیمت')
+    
     image = models.ImageField(upload_to=upload_image_path,null=True,blank=True,verbose_name='تصویر')
+    
     active = models.BooleanField(default=False,verbose_name='وضعیت فعالیت محصول')
+   
     visit_count = models.IntegerField(default=0,verbose_name='تعداد بازدید',editable=False)
+    
     is_slider = models.BooleanField(default=False,verbose_name='استفاده به عنوان اسلایدر')
 
 
