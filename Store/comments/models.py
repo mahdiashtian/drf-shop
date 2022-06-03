@@ -1,9 +1,9 @@
 from django.db import models
 
 
-class Comment(models.Model):
-    father = models.ForeignKey('comments.Comment',on_delete=models.CASCADE,verbose_name='ریپلای شده',blank=True,null=True)
-    
+
+
+class Comment(models.Model):    
     product = models.ForeignKey('products.Product',on_delete=models.CASCADE,verbose_name='محصول')
     
     user = models.ForeignKey('auth.User',on_delete=models.CASCADE,verbose_name='کاربر')
@@ -13,7 +13,6 @@ class Comment(models.Model):
     date_time_edit = models.DateTimeField(auto_now=True,verbose_name='تاریخ اصلاح')
     
     confirmation = models.BooleanField(default=False,verbose_name='تایید شده/نشده')
-
 
     main_message = models.CharField(max_length=150,verbose_name='کامنت')
 
@@ -27,3 +26,5 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.product.title
+
+
