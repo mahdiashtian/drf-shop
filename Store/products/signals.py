@@ -8,5 +8,5 @@ def run_after_delete(instance,**kwargs):
 
     path = instance.image.path
 
-    if os.path.exists(q):
-        os.remove(q)
+    if os.path.exists(path):
+        os.remove(path)

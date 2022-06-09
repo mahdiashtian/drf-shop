@@ -17,11 +17,16 @@ from django.contrib import admin
 from django.urls import path , include
 from Store import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('api-dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api-dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+
     path('api/v1/', include('products.urls',namespace='api-v1-products')),
     path('api/v1/', include('comments.urls',namespace='api-v1-comments')),
     path('api/v1/', include('galleries.urls',namespace='api-v1-galries')),

@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Comment(models.Model):    
-    product = models.ForeignKey('products.Product',on_delete=models.CASCADE,verbose_name='محصول')
+    product = models.ForeignKey('products.Product',on_delete=models.CASCADE,verbose_name='محصول',null=True,blank=True)
     
     user = models.ForeignKey('auth.User',on_delete=models.CASCADE,verbose_name='کاربر')
     
@@ -16,6 +16,10 @@ class Comment(models.Model):
 
     main_message = models.CharField(max_length=150,verbose_name='کامنت')
 
+    reply = models.ForeignKey('comments.Comment',on_delete=models.CASCADE,related_name='reply_c',verbose_name='ریپلای',null=True,blank=True)
+
+    is_reply = models.BooleanField(default=False)
+
     class Meta:
         app_label = "comments"
         verbose_name = 'کامنت'
@@ -25,6 +29,7 @@ class Comment(models.Model):
         
 
     def __str__(self):
-        return self.product.title
+        return f'{self.user.username}-{self.date_time_added}'
 
-
+    def get_reply(self):
+        return self.reply_c.all()
