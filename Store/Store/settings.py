@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'products',
     'galleries',
     'comments',
+    'categorys',
 ]
 
 MIDDLEWARE = [
@@ -95,10 +96,14 @@ WSGI_APPLICATION = 'Store.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+      'default': {
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': 'store',
+          'USER': 'storedj',
+          'PASSWORD': 'password',
+          'HOST': 'localhost',
+          'PORT': '',
+      }
 }
 
 
@@ -138,11 +143,6 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.TokenAuthentication',
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    ],
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
-        'rest_framework.filters.SearchFilter',
-        'rest_framework.filters.OrderingFilter',
     ],
 
 

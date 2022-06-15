@@ -31,5 +31,6 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.user.username}-{self.date_time_added}'
 
+
     def get_reply(self):
         return self.reply_c.all()
