@@ -20,16 +20,19 @@ def upload_image_path(instance,filename):
 
 class Ip(models.Model):
     ip_list = ArrayField(
-            models.CharField(max_length=18, blank=True),
-
+            models.CharField(max_length=18, blank=True),default=list,verbose_name='ایپی های بازدید کننده از این محصول'
     )
 
     
+    # def ReturnView(self):
+        # print(self.ip_list)
+
+
     class Meta:
         abstract = True
 
 
-class Product(models.Model):
+class Product(Ip):
     userdefined_error_msg = {
         'max_length': 'حداثر 150 حرف',
         'blank': 'این فیلد نمی تواند خالی باشد'
@@ -54,6 +57,8 @@ class Product(models.Model):
     is_slider = models.BooleanField(default=False,verbose_name='استفاده به عنوان اسلایدر')
 
     category = models.ManyToManyField(Category,blank=True,verbose_name="دسته بندی ها")
+
+    # visit_count = models.IntegerField(editable=False)
 
     seen = models.IntegerField(default=0)
 
