@@ -58,10 +58,6 @@ class Product(Ip):
 
     category = models.ManyToManyField(Category,blank=True,verbose_name="دسته بندی ها")
 
-    # visit_count = models.IntegerField(editable=False)
-
-    seen = models.IntegerField(default=0)
-
 
     class Meta:
         app_label = "products"
