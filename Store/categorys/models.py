@@ -8,14 +8,17 @@ class Category(models.Model):
 
 
     class Meta:
-        ordering = ['parent_id']
+        ordering = ['-parent_id']
         verbose_name = 'دسته بندی'
         verbose_name_plural = 'دسته بندی ها'
 
 
     def get_absolute_url(self):
-        pass
-        # return reverse("category:Category",kwargs={"category_name":self.name}) 
+        return reverse("categorys:category-detail",kwargs={"pk":self.id}) 
+
+
+    def get_child(self):
+        return self.ch.all()
 
 
     def StructureCategory(self):

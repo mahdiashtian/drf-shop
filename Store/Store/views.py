@@ -7,12 +7,3 @@ from django.views.generic import TemplateView
 
 class TemplateVerify(TemplateView):
     template_name = 'verify-email.html'
-
-
-class RevokeToken(APIView):
-    permission_classes = (IsAuthenticated,)
-
-
-    def delete(self,request):
-        request.auth.delete()
-        return Response()

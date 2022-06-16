@@ -1,9 +1,8 @@
 from django.contrib import admin
-from django.db.models import fields
-from .models import Product
-from django.contrib import messages
+from .models import Product,Ip
 from django import forms
 from django.utils.translation import ngettext
+from django.utils.html import format_html
 
 
 class EventForm(forms.ModelForm):
@@ -28,8 +27,14 @@ class ProductAdmin(admin.ModelAdmin):
             form = EventAdminForm
         else:
             form = EventForm
-
         return form
+
+
+    @admin.display(description='تصویر')
+    def image_admin(self,obj):
+        if obj.image:
+            return format_html(f"<img width=40 heigth=30 src={obj.image.url}> ")
+        return ""
 
 
     class Meta:
@@ -37,3 +42,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Ip)
