@@ -3,13 +3,13 @@ import os
 from django.urls import reverse
 from django.db.models import Q
 from products.models import Product
-from .utils import upload_galleries_image_path
+from utils.utils import upload_galleries_image_path
 
 
-class ProductGallery(models.Model):
+class Gallery(models.Model):
     image = models.ImageField(upload_to=upload_galleries_image_path, verbose_name='تصویر')
     
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='gallery',related_query_name='gallery_Q')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='gallery_product',related_query_name='gallery_Q')
 
 
     class Meta:

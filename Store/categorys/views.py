@@ -27,4 +27,3 @@ class CategoryRetrieveView(generics.ListAPIView):
         pk = self.kwargs['pk']
         queryset = Product.objects.filter(category=pk)
         return queryset
-

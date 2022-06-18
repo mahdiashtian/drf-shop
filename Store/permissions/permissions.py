@@ -23,7 +23,7 @@ class IsStaffOrReadOnly(BasePermission):
         )
 
 
-class Isauthor(BasePermission):
+class IsAuthor(BasePermission):
     """
     The request is author comment, or send error.
     """

@@ -3,7 +3,7 @@ from django.db import models
 from categorys.models import Category
 from rest_framework.reverse import reverse
 from django.contrib.postgres.fields import ArrayField
-from .utils import upload_image_path
+from utils.utils import upload_image_path
 
 
 class Ip(models.Model):
@@ -26,33 +26,27 @@ class Ip(models.Model):
 
 
 class Product(models.Model):
-    userdefined_error_msg = {
-        'max_length': 'حداثر 150 حرف',
-        'blank': 'این فیلد نمی تواند خالی باشد'
-    }
-
     title = models.CharField(
         verbose_name='عنوان',
         max_length=150,
         blank=False,
         help_text="اسم محصول",
-        error_messages=userdefined_error_msg
     )
     
     description = models.TextField(verbose_name='توضیحات')
     
     price = models.IntegerField(verbose_name='قیمت')
-    
+
     image = models.ImageField(upload_to=upload_image_path,null=True,blank=True,verbose_name='تصویر')
     
     active = models.BooleanField(default=False,verbose_name='وضعیت فعالیت محصول')
        
     is_slider = models.BooleanField(default=False,verbose_name='استفاده به عنوان اسلایدر')
 
-    category = models.ManyToManyField(Category,blank=True,verbose_name="دسته بندی ها")
+    category = models.ManyToManyField(Category,blank=True,verbose_name="دسته بندی ها",related_name='product_category')
 
     ip = models.OneToOneField(Ip,on_delete=models.SET_NULL,blank=True,null=True,related_name='product_ip')
-    
+
 
     class Meta:
         app_label = "products"

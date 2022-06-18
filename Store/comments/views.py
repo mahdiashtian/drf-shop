@@ -1,51 +1,40 @@
-from rest_framework.generics import (
-    ListAPIView , 
-    CreateAPIView , 
-    RetrieveDestroyAPIView )
 
-from .serializer_ import (
-    CommentٰViewSerializers ,
-    CommentٰAddSerializers , 
-    CommentAddReplySerializers,
-    CommentDeleteReplySerializers,)
-
+from rest_framework import generics
 from .models import Comment
+from .serializer_ import CommentSerializer
 from rest_framework.permissions import IsAuthenticated
+from permissions.permissions import IsAuthor
 from django.db.models import Q
-from Store.permissions import IsStaffOrReadOnly , Isauthor
 
-class CommentView(ListAPIView):
-    serializer_class = CommentٰViewSerializers
+
+class CommentView(generics.ListAPIView):
+    serializer_class = CommentSerializer
     lookup_field = 'pk'
     permission_classes = [IsAuthenticated]
 
-
+    
     def get_queryset(self):
         query_string = self.kwargs
         pk = query_string['pk']
-        lockup = (Q(product__id=pk) &  Q(is_reply=False))
+        lockup = (Q(product__id=pk) &  Q(reply=None))
         queryset = Comment.objects.filter(lockup)
         return queryset
 
 
-class CommentAdd(CreateAPIView):
-    serializer_class = CommentٰAddSerializers
+class CommentAdd(generics.CreateAPIView):
+    serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
-
     
-class CommentAddReply(CreateAPIView):
-    serializer_class = CommentAddReplySerializers
-    permission_classes = [IsAuthenticated]
 
-
-class CommentDelete(RetrieveDestroyAPIView):
-    lookup_field = 'pk'
-    serializer_class = CommentDeleteReplySerializers
-    permission_classes = [IsAuthenticated,Isauthor]
+class CommentDelete(generics.DestroyAPIView):
+    lookup_field = 'id'
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated,IsAuthor]
 
 
     def get_queryset(self):
         query_string = self.kwargs
         pk = query_string['pk']
-        queryset = Comment.objects.filter(id=pk)
+        id_ = query_string['id']
+        queryset = Comment.objects.filter(product__id=pk,id=id_)
         return queryset

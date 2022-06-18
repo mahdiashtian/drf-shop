@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProductGallery
+from .models import Gallery
 
 
-admin.site.register(ProductGallery)
+admin.site.register(Gallery)

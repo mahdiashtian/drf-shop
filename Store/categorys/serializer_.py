@@ -12,7 +12,7 @@ class CategorySerializers(DynamicFieldsMixin,serializers.ModelSerializer):
                 "title":i.title,
                 "url":i.get_absolute_url()
              }
-             for i in obj.get_child()]
+             for i in obj.category_parent.all()]
         return category_list
 
 
