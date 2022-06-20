@@ -32,7 +32,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
     reply_ = serializers.SerializerMethodField()
 
-
     class Meta:
         model = Comment
 

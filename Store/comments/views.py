@@ -10,15 +10,16 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
-    filterset_fields = ['product']
-    filter_backends = [DjangoFilterBackend]
 
     def get_queryset(self):
-        queryset = Comment.objects.filter(reply=None)
-        return queryset
+        pk = self.kwargs['id']
+        query = (Q(product_id=pk) & Q(reply=None))
+        return Comment.objects.filter(query)
 
 
-    def get_permissions_calsses(self):
+    def get_permissions(self):
         if self.action in ['get','post']:
-            return [IsAuthenticated]
-        return [IsAuthenticated,IsAuthor]
+            permission_classes = [IsAuthenticated]
+        else:
+            permission_classes = [IsAuthenticated,IsAuthor]
+        return [permission() for permission in permission_classes]

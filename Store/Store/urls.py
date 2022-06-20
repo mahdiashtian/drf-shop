@@ -54,8 +54,8 @@ urlpatterns = [
     path('api-dj-rest-auth/', include('dj_rest_auth.urls')),
     path('api-dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
-    path('api/', include('products.urls',namespace='api-v1-products')),
     path('api/', include('comments.urls',namespace='api-v1-comments')),
+    path('api/', include('products.urls',namespace='api-v1-products')),
     path('api/', include('galleries.urls',namespace='api-v1-galries')),
     path('api/', include('categorys.urls',namespace='api-v1-category')),
 
