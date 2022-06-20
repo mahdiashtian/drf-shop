@@ -13,7 +13,7 @@ def get_file_name(file_name):
 def upload_image_path(instance=None,filename=None):
     name,ext = get_file_name(filename)
     final_name = f"{instance.title}{ext}"
-    return f"{PRODUCT_IMAGE_ROOT}{instance.id}/{final_name}"
+    return f"{PRODUCT_IMAGE_ROOT}{instance.title}/{final_name}"
 
 
 def upload_galleries_image_path(instance=None,filename=None):

@@ -7,12 +7,13 @@ from rest_framework import serializers
 from sqlalchemy import null
 from .models import Comment
 from django.contrib.auth import get_user_model
+from drf_dynamic_fields import DynamicFieldsMixin
 
 
 User = get_user_model()
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
 
     @staticmethod
     def get_reply_(obj):

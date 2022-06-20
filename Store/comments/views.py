@@ -1,11 +1,9 @@
-
-from rest_framework import generics , viewsets
+from rest_framework import viewsets
 from .models import Comment
 from .serializer_ import CommentSerializer
 from rest_framework.permissions import IsAuthenticated
 from permissions.permissions import IsAuthor
 from django.db.models import Q
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class CommentViewSet(viewsets.ModelViewSet):

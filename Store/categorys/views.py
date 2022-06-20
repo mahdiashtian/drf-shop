@@ -1,29 +1,28 @@
+from unicodedata import category
+from products.serializer_ import ProductSerializers
 from .serializer_ import CategorySerializers
 from .models import Category
-from rest_framework import generics
-from rest_framework.filters import SearchFilter
+from rest_framework import viewsets
 from products.models import Product
-from products.serializer_ import ProductSerializers
 
-
-class CategoryListView(generics.ListAPIView):
-    lookup_field = 'pk'
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'category'
+    lookup_url_kwarg = 'pk'
     serializer_class = CategorySerializers
-    search_fields = ['title']
-    filter_backends = [SearchFilter]
-
+    queryset = Category.objects.all()
 
     def get_queryset(self):
-        queryset = Category.objects.filter(parent=None)
+        if self.action == 'list':
+            queryset = Category.objects.all()
+        else:
+            queryset = Product.objects.all()
         return queryset
+    
 
-
-class CategoryRetrieveView(generics.ListAPIView):
-    lookup_field = 'pk'
-    serializer_class = ProductSerializers
-
-
-    def get_queryset(self):
-        pk = self.kwargs['pk']
-        queryset = Product.objects.filter(category=pk)
-        return queryset
+    def get_serializer_class(self):
+        if self.action == 'list':
+            serializer_class = CategorySerializers
+        else:
+            serializer_class = ProductSerializers
+        return serializer_class
+    
