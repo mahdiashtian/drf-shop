@@ -36,5 +36,5 @@ class CommentDelete(generics.DestroyAPIView):
         query_string = self.kwargs
         pk = query_string['pk']
         id_ = query_string['id']
-        queryset = Comment.objects.filter(product__id=pk,id=id_)
+        queryset = Comment.objects.filter(id=id_)
         return queryset

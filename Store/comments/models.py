@@ -8,8 +8,6 @@ class Comment(models.Model):
     
     date_time_added = models.DateTimeField(auto_now_add=True,verbose_name='تاریخ ثبت')
     
-    date_time_edit = models.DateTimeField(auto_now=True,verbose_name='تاریخ اصلاح')
-    
     confirmation = models.BooleanField(default=False,verbose_name='تایید شده/نشده')
 
     main_message = models.CharField(max_length=150,verbose_name='کامنت')
@@ -21,11 +19,11 @@ class Comment(models.Model):
         verbose_name = 'کامنت'
         verbose_name_plural = 'کامنت ها'
         base_manager_name = "objects"
-        ordering = ['date_time_added','date_time_edit']
+        ordering = ['-reply_id']
         
 
     def __str__(self):
-        return f'{self.user.username}-{self.date_time_added}'
+        return f'{self.user.username}-:-{self.main_message}'
 
 
     def get_reply(self):

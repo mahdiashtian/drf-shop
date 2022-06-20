@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'debug_toolbar',
+
     'drf_yasg',
 
     'rest_framework',
@@ -69,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'Store.urls'
@@ -132,6 +135,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
     ],
+    # 'DEFAULT_RENDERER_CLASSES': (
+        # 'rest_framework.renderers.JSONRenderer',
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework.authentication.SessionAuthentication',
@@ -140,7 +146,6 @@ REST_FRAMEWORK = {
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ],
 }
-# from rest_framework.authentication import SessionAuthentication
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -182,3 +187,5 @@ REST_USE_JWT = True
 
 JWT_AUTH_COOKIE = 'store-access'
 JWT_AUTH_REFRESH_COOKIE = 'store-refresh'
+
+INTERNAL_IPS = ('127.0.0.1', )
