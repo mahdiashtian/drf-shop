@@ -24,7 +24,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.user.username}-:-{self.main_message}'
-
-
-    def get_reply(self):
-        return self.comment_reply.all()
