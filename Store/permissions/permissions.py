@@ -24,9 +24,7 @@ class IsStaffOrReadOnly(BasePermission):
 
 
 class IsAuthor(BasePermission):
-    """
-    The request is author comment, or send error.
-    """
+    message = 'شما حق انجام این عملیات را ندارید'
 
     def has_object_permission(self, request, view, obj):
         return bool(request.user == obj.user or request.user.is_superuser)

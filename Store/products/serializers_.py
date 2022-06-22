@@ -1,6 +1,6 @@
-from rest_framework import serializers
-from .models import Product
+from products.models import Product
 from drf_dynamic_fields import DynamicFieldsMixin
+from rest_framework import serializers
 
 
 class ProductSerializers(DynamicFieldsMixin,serializers.ModelSerializer):

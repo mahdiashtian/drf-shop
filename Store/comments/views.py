@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .models import Comment
-from .serializer_ import CommentSerializer
+from .serializers_ import CommentSerializer
 from rest_framework.permissions import IsAuthenticated
 from permissions.permissions import IsAuthor
 from django.db.models import Q
@@ -16,7 +16,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
     def get_permissions(self):
-        if self.action in ['get','post']:
+        if self.action in ['get']:
             permission_classes = [IsAuthenticated]
         else:
             permission_classes = [IsAuthenticated,IsAuthor]

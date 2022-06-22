@@ -1,4 +1,4 @@
-from .serializer_ import ProductSerializers
+from .serializers_ import ProductSerializers
 from .models import Product
 from rest_framework import viewsets
 from .filters import ProductFilter

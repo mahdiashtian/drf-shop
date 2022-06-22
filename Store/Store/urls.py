@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from rest_framework.authtoken import views
 from .views import TemplateVerify
 from rest_framework_simplejwt import views as jwt_views
-from dj_rest_auth.views import PasswordResetConfirmView
+from dj_rest_auth.views import PasswordResetConfirmView , UserDetailsView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -42,6 +42,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # ovverride the user view
+    path('user/', UserDetailsView.as_view(), name='user_details'),
+
     # override the email verification template
     path(
         'api-dj-rest-auth/registration/account-email-verification-sent/', TemplateVerify.as_view(),
@@ -58,6 +61,7 @@ urlpatterns = [
     path('api/', include('products.urls',namespace='api-v1-products')),
     path('api/', include('galleries.urls',namespace='api-v1-galries')),
     path('api/', include('categorys.urls',namespace='api-v1-category')),
+    path('api/', include('orders.urls',namespace='api-v1-orders')),
 
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

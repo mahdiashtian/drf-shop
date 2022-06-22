@@ -1,16 +1,6 @@
-from dataclasses import fields
-from email.policy import default
-from pyexpat import model
-from click import edit
-from numpy import source
 from rest_framework import serializers
-from sqlalchemy import null
-from .models import Comment
-from django.contrib.auth import get_user_model
 from drf_dynamic_fields import DynamicFieldsMixin
-
-
-User = get_user_model()
+from comments.models import Comment
 
 
 class CommentSerializer(DynamicFieldsMixin,serializers.ModelSerializer):

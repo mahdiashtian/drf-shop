@@ -1,9 +1,9 @@
-from unicodedata import category
-from products.serializer_ import ProductSerializers
-from .serializer_ import CategorySerializers
+from .serializers_ import CategorySerializers 
+from products.serializers_ import ProductSerializers
 from .models import Category
 from rest_framework import viewsets
 from products.models import Product
+
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = 'category'
