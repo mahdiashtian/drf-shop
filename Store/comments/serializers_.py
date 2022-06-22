@@ -40,8 +40,6 @@ class CommentSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
 
         read_only_fields = [
             'confirmation',
-            'reply_',
-            'user_',
             ]
 
         extra_kwargs = {
