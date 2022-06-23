@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'django.contrib.postgres',
+
     'debug_toolbar',
 
     'drf_yasg',
@@ -190,3 +192,5 @@ JWT_AUTH_COOKIE = 'store-access'
 JWT_AUTH_REFRESH_COOKIE = 'store-refresh'
 
 INTERNAL_IPS = ('127.0.0.1', )
+
+CART_SESSION_ID = 'cart'
