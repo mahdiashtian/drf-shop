@@ -9,7 +9,7 @@ from rest_framework import mixins
 
 class ServiceUnavailable(APIException):
     status_code = 409
-    default_detail = 'این سبد خرید برای شما نیست و یا پرداخت شده است'
+    default_detail = 'این سبد خرید برای شما نیست'
 
 
 class OrderViewSet(mixins.ListModelMixin,
@@ -35,7 +35,7 @@ class OrderDetailViewSet(viewsets.ModelViewSet):
         pk = self.kwargs['id']
         if self.request.user.is_authenticated:
             user = self.request.user
-            lookup = (Q(order__user=user) & Q(order__id=pk) & Q(order__is_paid=False))
+            lookup = (Q(order__user=user) & Q(order__id=pk))
             queryset = OrderDetail.objects.filter(lookup)
             if queryset:
                 return queryset
