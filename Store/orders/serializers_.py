@@ -21,6 +21,8 @@ class OrderDetailSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
 
     price = serializers.ReadOnlyField(source='product.price')
 
+    url = serializers.ReadOnlyField(source='get_absolute_url')
+
     class Meta:
         model = OrderDetail
         fields = [
@@ -29,7 +31,9 @@ class OrderDetailSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
             'product',
             'price',
             'order',
-            'count']
+            'count',
+            'url',
+            ]
 
         read_only_fields = [
             'price',
@@ -39,22 +43,14 @@ class OrderDetailSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
 
-    def validate(self,value):
-        value['user'] = self.context['request'].user
-        if Order.objects.filter(user=value['user'],is_paid=False).exists():
-            raise serializers.ValidationError('شما از قبل یک سبد خرید باز دارید')
-        return value
-
-
     url = serializers.ReadOnlyField(source='get_absolute_url')
-
 
     class Meta:
         model = Order
-        fields = '__all__'
-
-        read_only_fields = [
-            'user',
+        fields = [
+            'id',
             'is_paid',
             'date_paid',
+            'url',
+            'user',
         ]

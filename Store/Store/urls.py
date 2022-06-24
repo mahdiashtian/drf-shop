@@ -43,7 +43,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # ovverride the user view
-    path('user/', UserDetailsView.as_view(), name='user_details'),
+    path('api/v1/user/', UserDetailsView.as_view(), name='user_details'),
 
     # override the email verification template
     path(

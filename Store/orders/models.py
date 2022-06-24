@@ -7,8 +7,6 @@ from rest_framework.reverse import reverse
 User = get_user_model()
 
 
-
-
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     is_paid = models.BooleanField(verbose_name="پرداخت شده / نشده",default=False)
@@ -20,9 +18,8 @@ class Order(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse("orders:order-detail", kwargs={"pk": self.pk})
+        return reverse("orders:order-dt-list", kwargs={"id": self.pk})
     
-
 
     def __str__(self):
         return self.user.username
@@ -37,6 +34,11 @@ class OrderDetail(models.Model):
     class Meta:
         verbose_name = "جزییات محصول"
         verbose_name_plural = "اطلاعات جزییات محصولات"
+
+
+    def get_absolute_url(self):
+        return reverse("orders:order-dt-detail", kwargs={"id":self.order.id,"pk": self.pk})
+
 
     def __str__(self):
         return self.product.title
