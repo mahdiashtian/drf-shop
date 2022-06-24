@@ -3,7 +3,6 @@ from orders.models import Order , OrderDetail
 from .serializers_ import OrderSerializer , OrderDetailSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import APIException
-from django.db.models import Q
 from rest_framework import mixins
 
 
@@ -35,8 +34,7 @@ class OrderDetailViewSet(viewsets.ModelViewSet):
         pk = self.kwargs['id']
         if self.request.user.is_authenticated:
             user = self.request.user
-            lookup = (Q(order__user=user) & Q(order__id=pk))
-            queryset = OrderDetail.objects.filter(lookup)
+            queryset = OrderDetail.objects.filter(order__user=user,order__id=pk)
             if queryset:
                 return queryset
             else:
@@ -44,10 +42,9 @@ class OrderDetailViewSet(viewsets.ModelViewSet):
 
 
     def get_serializer_class(self):
+        serializer_class = OrderDetailSerializer
         if self.action == 'update':
-            serializer_class = OrderDetailSerializer
             serializer_class.Meta.fields = ('count','product_title','price','url')
         else:
-            serializer_class = OrderDetailSerializer
             serializer_class.Meta.fields = ['id','product_title','product','price','order','count','url']
         return serializer_class

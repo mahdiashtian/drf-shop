@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'django.contrib.postgres',
-
     'debug_toolbar',
 
     'drf_yasg',
@@ -143,10 +141,10 @@ REST_FRAMEWORK = {
     # ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework.authentication.TokenAuthentication',
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # 'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ],
 }
 # Internationalization
@@ -166,31 +164,27 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "assets")
-]
-
-STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn","static_root")
-
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn","media_root")
 
-SITE_ID = 1
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "assets")
+]
 
-REST_USE_JWT = True
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-JWT_AUTH_COOKIE = 'store-access'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SITE_ID = 1 # To allauth and django-rest-auth registration
+
+REST_USE_JWT = True # To use jwt in djang-rest-auth
+
+# To automatically register jwt in a cookie
+JWT_AUTH_COOKIE = 'store-access' 
 JWT_AUTH_REFRESH_COOKIE = 'store-refresh'
 
-INTERNAL_IPS = ('127.0.0.1', )
-
-CART_SESSION_ID = 'cart'
+INTERNAL_IPS = ('127.0.0.1', ) # for debug_toolbar

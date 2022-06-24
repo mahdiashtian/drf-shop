@@ -28,36 +28,30 @@ class CommentSerializer(DynamicFieldsMixin,serializers.ModelSerializer):
 
         fields = [
             'id',
-            'user_',
-            'reply_',
             'user',
             'product',
             'reply',
             'date_time_added',
             'confirmation',
             'main_message',
+            'user_',
+            'reply_',
         ]
 
         read_only_fields = [
             'confirmation',
-            'reply_',
-            'user_',
+            'user',
             ]
 
         extra_kwargs = {
-            'user':{'write_only':True},
             'product':{'write_only':True},
             'reply':{'write_only':True},
         }
 
 
-    def validate_user(self,value):
-        if self.context['request'].user != value:
-            raise serializers.ValidationError("شما حق دسترسی ندارید")
-        return value
-
-
     def validate(self,data):
-        if data['product'] and data['reply']:
+        if data.get('product',None)  and data.get('reply',None):
             raise serializers.ValidationError("مقادیر ارسالی نامعتبر می با شد") 
+        user = self.context['request'].user
+        data['user'] = user
         return data

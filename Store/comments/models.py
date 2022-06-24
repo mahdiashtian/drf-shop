@@ -14,6 +14,7 @@ class Comment(models.Model):
 
     reply = models.ForeignKey('comments.Comment',on_delete=models.CASCADE,related_name='comment_reply',verbose_name='ریپلای',null=True,blank=True)
 
+
     class Meta:
         app_label = "comments"
         verbose_name = 'کامنت'

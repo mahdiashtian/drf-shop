@@ -8,6 +8,7 @@ from utils.utils import upload_image_path
 
 class Ip(models.Model):
     title = models.CharField(max_length=150,blank=True,null=True)
+
     ip_list = ArrayField(
             models.CharField(max_length=18, blank=True),default=list,verbose_name='ایپی های بازدید کننده از این محصول'
     )
@@ -63,10 +64,6 @@ class Product(models.Model):
 
     def ip_list(self):
         return len(self.ip.ip_list)
-
-
-    def get_gallery(self):
-        pass
 
 
     def __str__(self):

@@ -1,19 +1,27 @@
 from .serializers_ import CategorySerializers 
 from products.serializers_ import ProductSerializers
 from .models import Category
-from rest_framework import viewsets
+from rest_framework import viewsets , mixins
 from products.models import Product
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
-class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    lookup_field = 'category'
-    lookup_url_kwarg = 'pk'
+class CategoryViewSet(mixins.ListModelMixin,
+                           viewsets.GenericViewSet):
     serializer_class = CategorySerializers
-    queryset = Category.objects.all()
+
+
+    @action(detail=True, methods=['get'])
+    def list_product(self, request, pk=None):
+        queryser = self.get_queryset().filter(category=pk)
+        serializer = self.get_serializer(queryser,many=True)
+        return Response(serializer.data)
+
 
     def get_queryset(self):
         if self.action == 'list':
-            queryset = Category.objects.all()
+            queryset = Category.objects.filter(parent=None)
         else:
             queryset = Product.objects.all()
         return queryset

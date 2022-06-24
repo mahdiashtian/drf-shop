@@ -15,4 +15,5 @@ class CategorySerializers(DynamicFieldsMixin,serializers.ModelSerializer):
     
     class Meta:
         model = Category
-        fields = '__all__'
+        
+        fields = ['id','title','url','parent']

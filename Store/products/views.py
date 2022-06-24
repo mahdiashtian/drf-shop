@@ -8,11 +8,11 @@ from .mixins import AddView
 
 
 class ProductViewSet(AddView,viewsets.ReadOnlyModelViewSet):
-    serializer_class = ProductSerializers
     lookup_field = 'pk'
-    filterset_class = ProductFilter
     search_fields = ['title','category__title']
     ordering_fields = ['price']
+    serializer_class = ProductSerializers
+    filterset_class = ProductFilter
     filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
     
 

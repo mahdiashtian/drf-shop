@@ -9,8 +9,11 @@ User = get_user_model()
 
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+
     is_paid = models.BooleanField(verbose_name="پرداخت شده / نشده",default=False)
+
     date_paid = models.DateTimeField(blank=True,null=True,verbose_name="تاریخ پرداخت")
+
 
     class Meta:
         verbose_name = "سبد خرید"
@@ -27,9 +30,13 @@ class Order(models.Model):
 
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE,verbose_name="سبد خرید")
+
     product = models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name="محصول")
+    
     price = models.IntegerField(verbose_name="قیمت محصول",blank=True,null=True)
+
     count = models.PositiveIntegerField(verbose_name="تعداد")
+
 
     class Meta:
         verbose_name = "جزییات محصول"
@@ -42,5 +49,3 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return self.product.title
-
-
